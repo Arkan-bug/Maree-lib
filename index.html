@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentation Lib-Maree | Yrieix MICHAUD</title>
+    <link rel="stylesheet" href="doc-style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+
+    <header>
+        <div class="header-content">
+            <img src="https://www.shom.fr/sites/default/files/Shom_horizontal_0.png" alt="SHOM Logo" class="logo">
+            <div class="titles">
+                <h1>Documentation Technique</h1>
+                <h2>Composant Web <code>&lt;data-maree&gt;</code></h2>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="lib-link-box">
+            <h3><i class="fa-solid fa-code"></i> Installation</h3>
+            <p>Cliquez sur le bloc ci-dessous pour copier la balise d'intégration :</p>
+            <div class="copy-box" id="copy-script" title="Cliquer pour copier">
+                <code id="script-text">&lt;script src="https://refmar.shom.fr/sites/default/files/Ecran/Lib/maree-lib.js"&gt;&lt;/script&gt;</code>
+                <span class="copy-badge"><i class="fa-regular fa-copy"></i> Copier</span>
+            </div>
+        </section>
+
+        <h3>Commandes Disponibles (Attribut <code>info</code>)</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Valeur</th>
+                    <th>Description</th>
+                    <th>Résultat attendu</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td><code>actu</code></td><td>Hauteur d'eau en temps réel</td><td>4.15m</td></tr>
+                <tr><td><code>last_date</code></td><td>Heure de la dernière observation</td><td>11:33:12</td></tr>
+                <tr><td><code>max_height</code></td><td>Plus haute mer astronomique (NPHMA)</td><td>8.50m</td></tr>
+                <tr><td><code>id</code></td><td>Identifiant SHOM du port choisi</td><td>3</td></tr>
+                <tr><td><code>graph-direct</code></td><td>Marégramme de la journée en cours</td><td>Image</td></tr>
+                <tr><td><code>graph-inter</code></td><td>Graphique sur intervalle de dates</td><td>Image</td></tr>
+            </tbody>
+        </table>
+
+        <h3>Exemples & Rendu Live</h3>
+        <div class="example-grid">
+            <div class="example-card">
+                <div class="code-part"><code>&lt;data-maree port="Brest" info="actu"&gt;&lt;/data-maree&gt;</code></div>
+                <div class="result-part">
+                    <span class="label">Hauteur à Brest :</span>
+                    <span class="live-val"><data-maree port="Brest" info="actu"></data-maree></span>
+                </div>
+            </div>
+            
+            <div class="example-card">
+                <div class="code-part"><code>&lt;data-maree port="Brest" info="graph-direct" sources="1,10"&gt; <br>&lt;/data-maree&gt;</code></div>
+                <div class="result-part">
+                    <span class="label">Graphique direct :</span>
+                    <div class="mini-graph"><data-maree port="Brest" info="graph-direct" sources="1,10"></data-maree></div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>© 2026 Yrieix MICHAUD | <data-maree port="Brest" info="last_date"></data-maree></p>
+    </footer>
+
+    <script>
+        document.getElementById('copy-script').addEventListener('click', function() {
+            const text = document.getElementById('script-text').innerText;
+            navigator.clipboard.writeText(text).then(() => {
+                const badge = this.querySelector('.copy-badge');
+                badge.innerHTML = '<i class="fa-solid fa-check"></i> Copié !';
+                badge.style.background = '#22c55e';
+                setTimeout(() => {
+                    badge.innerHTML = '<i class="fa-regular fa-copy"></i> Copier';
+                    badge.style.background = 'rgba(255,255,255,0.1)';
+                }, 2000);
+            });
+        });
+    </script>
+<body>
+    <script src="maree-lib.js"></script>
+</body>
+</html>
